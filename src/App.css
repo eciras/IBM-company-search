@@ -13,7 +13,7 @@
   }
 }
 
-.App-header {
+.header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -35,4 +35,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.container {
+  width: 65%;
+  margin: 0, auto;
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: max-content;
+  box-sizing: border-box;
+
+}
+
+.card {
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 10px;
+  text-align: center;
+  position: relative;
 }
