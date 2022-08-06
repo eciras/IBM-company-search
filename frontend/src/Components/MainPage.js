@@ -12,8 +12,7 @@ function MainPage() {
   const [company, setCompany] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const searchCompany = (e) => {
-    e.preventDefault();
+  const performSearch = () => {
     if (isSearchValid(search) === true) {
       axios
         .get(
@@ -30,6 +29,16 @@ function MainPage() {
         "Company name must be letter only and less than 35 symbols!"
       );
     }
+  };
+
+  const onEnter = (e) => {
+    if (e.key === "Enter") {
+      performSearch();
+    }
+  };
+
+  const searchCompany = (e) => {
+    performSearch();
   };
 
   return (
@@ -52,6 +61,7 @@ function MainPage() {
               placeholder="Enter company name"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              onKeyPress={onEnter}
             ></input>
             <button onClick={searchCompany}>Search</button>
           </div>
