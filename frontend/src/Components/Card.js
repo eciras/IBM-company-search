@@ -6,11 +6,18 @@ import { useState } from "react";
 import axios from "axios";
 import Plot from "react-plotly.js";
 
+
+
 function Card({ company }) {
+
+    let today=new Date();
+    let weekBack=new Date(today);
+    weekBack.setDate(weekBack.getDate() - 7);
+
   const [date, setDate] = useState([
     {
-      startDate: new Date(),
-      endDate: null,
+      startDate: today,
+      endDate: weekBack,
       key: "selection",
     },
   ]);
@@ -18,13 +25,13 @@ function Card({ company }) {
   const [stockData, setStockData] = useState({});
   const dateFormat = {year: '2-digit', month: '2-digit', day: '2-digit'};
 
-
   const searchStocks = (e) => {
+    console.log(date)
     axios
       .get(
         "https://finnhub.io/api/v1/stock/candle?symbol=" +
           company.ticker +
-          "&resolution=1&from=1631022248&to=1631627048&token=cbkj62iad3i8o8768nog"
+          "&resolution=1&from=" + date[0].startDate.getTime() / 1000 + "&to=" + date[0].endDate.getTime() / 1000 + "&token=cbkj62iad3i8o8768nog"
       )
       .then((res) => {
         setStockData(res.data);
