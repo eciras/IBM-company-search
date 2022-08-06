@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import LogUserAction from "./Logger";
 
 function isSearchValid(search) {
   return /^[a-zA-Z ]{1,35}$/g.test(search);
@@ -22,6 +23,7 @@ function MainPage() {
         .then((res) => {
           setCompany(res.data);
           console.log(res.data);
+          LogUserAction("Comany data retrieved ", res.data.name);
         })
         .catch((err) => console.log(err));
     } else {
@@ -43,11 +45,9 @@ function MainPage() {
 
   return (
     <>
-      <div className="header">
-        <div className="row1">
+      <div className="container">
+        <div className="row">
           <h1>Find more about your Company</h1>
-        </div>
-        <div className="row2">
           <h2>Search engine</h2>
           <div className="search">
             <div
@@ -55,7 +55,6 @@ function MainPage() {
             >
               {errorMessage}
             </div>
-
             <input
               type="text"
               placeholder="Enter company name"
@@ -65,9 +64,10 @@ function MainPage() {
             ></input>
             <button onClick={searchCompany}>Search</button>
           </div>
-          <div className="container">
-            <Card company={company}></Card>
-          </div>
+        </div>
+
+        <div className="row">
+          <Card company={company}></Card>
         </div>
       </div>
     </>
