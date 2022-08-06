@@ -7,7 +7,6 @@ import axios from "axios";
 import Plot from "react-plotly.js";
 import LogUserAction from "./Logger";
 
-
 function Card({ company }) {
   let today = new Date();
   let weekBack = new Date(today);
@@ -39,10 +38,17 @@ function Card({ company }) {
       .then((res) => {
         setStockData(res.data);
         console.log(res.data);
-        LogUserAction("Comany data stock data retrieved ",  JSON.stringify(res.data))
+        const logData = {
+          startDate: date[0].startDate,
+          endDate: date[0].endDate,
+          price: res.data.c,
+        };
+        LogUserAction(
+          "Comany data stock data retrieved ",
+          JSON.stringify(logData)
+        );
       })
       .catch((err) => console.log(err));
-
   };
 
   return (
