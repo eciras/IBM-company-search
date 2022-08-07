@@ -5,7 +5,7 @@ import { DateRange } from "react-date-range";
 import { useState } from "react";
 import axios from "axios";
 import Plot from "react-plotly.js";
-import LogUserAction from "./Logger";
+import LogUserActions from "./LogUserActions";
 
 function Card({ company }) {
   let today = new Date();
@@ -43,7 +43,7 @@ function Card({ company }) {
           endDate: date[0].endDate,
           price: res.data.c,
         };
-        LogUserAction(
+        LogUserActions(
           "Comany data stock data retrieved ",
           JSON.stringify(logData)
         );
@@ -52,53 +52,72 @@ function Card({ company }) {
   };
 
   return (
-    <div className="card col">
-      <div className="row align-items-start">
-        <div className="col">
-          <label onClick={searchStocks} className="pointer">
+    <div className="container text-center">
+      <div className="row mb-3">
+     
+        <ul className="col companyInfo">
+        <div className="smallText">Info about selected company:</div>
+          <li onClick={searchStocks} className="pointer col">
             {company.name}
-          </label>
-        </div>
+          </li>
+          <li className="col pointer">
+            <a href={company.weburl} target="_blank" rel="noreferrer">
+              {company.weburl}
+            </a>
+          </li>
+          <li className="col">
+          {company.country}
+          </li>
+          <li className="col">
+           {company.currency}
+          </li>
+        </ul>
         <div className="col">
-          <label>{company.weburl}</label>
-        </div>
-        <div className="col">
-          <label>{company.country}</label>
-        </div>
-        <div className="col">
-          <label>{company.currency}</label>
-        </div>
-        <div className="col">
-          <DateRange
-            className="datePicker"
-            editableDateInputs={true}
-            onChange={(item) => setDate([item.selection])}
-            moveRangeOnFirstSelection={false}
-            ranges={date}
-          />
+          <div className="col">
+            <p className="m-0 smallText">Select date range and click on company name</p>
+            <DateRange
+              className="datePicker"
+              editableDateInputs={true}
+              onChange={(item) => setDate([item.selection])}
+              ranges={date}
+            />
+          </div>
         </div>
       </div>
 
-      <div className="row">
-        <div className="col">
+      <div className="stockChart">
+        <div className={stockData.t == null ? "hideEl" : "showEl"}>
           <Plot
             data={[
               {
                 x:
                   stockData.t == null
                     ? []
-                    : stockData.t.map((unix) =>
+                    : stockData.t.map((e) =>
                         Intl.DateTimeFormat("en-US", dateFormat).format(
-                          unix * 1000
+                          e * 1000
                         )
                       ),
                 y: stockData.h,
                 type: "scatter",
                 mode: "lines+markers",
-                marker: { color: "red" },
+                marker: { color: "#D612A9" },
+                color: "red"
               },
             ]}
-            layout={{ width: 620, height: 440, title: "A Fancy Plot" }}
+            layout={{
+              autosize: true,
+              width: "100%",
+              height: "100%",
+              title: company.name,
+              paper_bgcolor: "#1b1285",
+              plot_bgcolor: "#1b1285",
+              font: {
+                family: "Cormorant SC, serif",
+                size: 20,
+                color: "whitesmoke"
+              }
+            }}
           />
         </div>
       </div>

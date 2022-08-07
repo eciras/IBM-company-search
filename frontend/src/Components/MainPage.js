@@ -1,8 +1,8 @@
 import React from "react";
 import Card from "./Card";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import LogUserAction from "./Logger";
+import { useState } from "react";
+import LogUserActions from "./LogUserActions";
 
 function isSearchValid(search) {
   return /^[a-zA-Z ]{1,35}$/g.test(search);
@@ -23,12 +23,12 @@ function MainPage() {
         .then((res) => {
           setCompany(res.data);
           console.log(res.data);
-          LogUserAction("Comany data retrieved ", res.data.name);
+          LogUserActions("Comany data retrieved ", res.data.name);
         })
         .catch((err) => console.log(err));
     } else {
       setErrorMessage(
-        "Company name must be letter only and less than 35 symbols!"
+        "Company name must be letters only and less than 35 symbols!"
       );
     }
   };
@@ -46,26 +46,34 @@ function MainPage() {
   return (
     <>
       <div className="container">
-        <div className="row">
-          <h1>Find more about your Company</h1>
-          <h2>Search engine</h2>
-          <div className="search">
+        <div className="col">
+          <h1>Find All Companies In One Place</h1>
+          <h6 className="smallText">Search engine</h6>
+          <div className="col-">
             <div
-              className={isSearchValid(search) === true ? "noError" : "error"}
+              className={isSearchValid(search) === true ? "hideEl" : "showEl"}
             >
               {errorMessage}
             </div>
-            <input
-              type="text"
-              placeholder="Enter company name"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyPress={onEnter}
-            ></input>
-            <button onClick={searchCompany}>Search</button>
+            <div className="row mx-auto">
+              <input
+                className="form-control col-9"
+                type="text"
+                placeholder="Enter company name"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyPress={onEnter}
+              ></input>
+              <button
+                type="button"
+                onClick={searchCompany}
+                className="btn btn-primary col-3 mb-3"
+              >
+                Search
+              </button>
+            </div>
           </div>
         </div>
-
         <div className="row">
           <Card company={company}></Card>
         </div>

@@ -1,38 +1,53 @@
-
-
-
-/* 
-.container {
-  width: 100%;
-  margin: 0, auto;
-  margin-top: 25px;
-  
-  
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* .card {
-  border-radius: 1rem;
-  padding: 0.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-} */
-
- .companyInfo {
-  display: flex;
-  flex-direction: column;
-  margin-right: 15px;
-}  */
+body {
+  background-image: url("https://images.unsplash.com/photo-1579547621113-e4bb2a19bdd6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=678&q=80");
+  color: rgb(0, 0, 0);
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: whitesmoke;
+}
 
 .pointer {
   cursor: pointer;
 }
 
-.error {
+.showEl {
   color: red;
   display: block;
 }
 
-.noError {
+.hideEl {
   display: none;
+}
+
+.companyInfo {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 2.2rem;
+}
+
+ul {
+  font-family: "Abril Fatface", cursive;
+}
+
+.stockChart {
+  margin: 2rem;
+}
+
+h1 {
+  font-family: "Abril Fatface", cursive;
+  font-size: 5rem;
+}
+.smallText {
+  font-family: "Cormorant SC", serif;
+  font-weight: bold;
 }
