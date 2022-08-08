@@ -22,7 +22,6 @@ function MainPage() {
         )
         .then((res) => {
           setCompany(res.data);
-          console.log(res.data);
           LogUserActions("Comany data retrieved ", res.data.name);
         })
         .catch((err) => console.log(err));

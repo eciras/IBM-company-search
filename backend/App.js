@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 
 const bodyParser = require("body-parser");
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
@@ -12,13 +13,16 @@ app.use(
     extended: true,
   })
 );
-app.use(cors());
 
 app.post("/log", (req, res) => {
   console.log(
     "Operation name: " + req.body.operation + ", data - " + req.body.data
   );
   res.sendStatus(200);
+});
+
+app.use((req, res) => {
+  res.sendStatus(404);
 });
 
 app.listen(3009, () => {

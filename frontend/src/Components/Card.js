@@ -37,7 +37,6 @@ function Card({ company }) {
       )
       .then((res) => {
         setStockData(res.data);
-        console.log(res.data);
         const logData = {
           startDate: date[0].startDate,
           endDate: date[0].endDate,
@@ -54,9 +53,8 @@ function Card({ company }) {
   return (
     <div className="container text-center">
       <div className="row mb-3">
-     
         <ul className="col companyInfo">
-        <div className="smallText">Info about selected company:</div>
+          <div className="smallText">Info about selected company:</div>
           <li onClick={searchStocks} className="pointer col">
             {company.name}
           </li>
@@ -65,16 +63,14 @@ function Card({ company }) {
               {company.weburl}
             </a>
           </li>
-          <li className="col">
-          {company.country}
-          </li>
-          <li className="col">
-           {company.currency}
-          </li>
+          <li className="col">{company.country}</li>
+          <li className="col">{company.currency}</li>
         </ul>
         <div className="col">
           <div className="col">
-            <p className="m-0 smallText">Select date range and click on company name</p>
+            <p className="m-0 smallText">
+              Select date range and click on company name
+            </p>
             <DateRange
               className="datePicker"
               editableDateInputs={true}
@@ -102,7 +98,7 @@ function Card({ company }) {
                 type: "scatter",
                 mode: "lines+markers",
                 marker: { color: "#D612A9" },
-                color: "red"
+                color: "red",
               },
             ]}
             layout={{
@@ -115,8 +111,8 @@ function Card({ company }) {
               font: {
                 family: "Cormorant SC, serif",
                 size: 20,
-                color: "whitesmoke"
-              }
+                color: "whitesmoke",
+              },
             }}
           />
         </div>
