@@ -9,9 +9,12 @@ Set up:
 git clone
 npm install
 
-Running:
+Frontend Running:
 npm start
 Your web browser should automatically open default: http://localhost:3000/.
+
+Backend Running:
+node app.js 
 
 
 Enjoy!
